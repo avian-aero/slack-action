@@ -1,21 +1,16 @@
 # Post Slack messages
 
-This action wraps the Slack [chat.postMessage](https://api.slack.com/methods/chat.postMessage) API method for posting to channels, private groups, and DMs. This action sends messages using [Slack bot tokens](https://api.slack.com/docs/token-types), which have two main advantages compared to user tokens and incoming webhooks: (1) Bots can't be disabled inadvertently when a Slack user is disabled or removed. Slack has written about this in a [recent announcement](https://medium.com/slack-developer-blog/the-latest-with-app-tokens-fe878d44130c), and (2) Bots offer a [powerful range of capabilities](https://api.slack.com/bot-users) that can be leveraged to perform more functions.
+Post slack messages on PR merge.
 
-## Usage:
+Inspired by abinoda/slack-action, but replaced the shell script with a JS script wwhich is more resilient to special characters, such as quotes, in the description.
 
 ```yaml
 - name: Notify slack
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  uses: pullreminders/slack-action@master
-  with:
-    args: '{\"channel\":\"C1234567890\",\"text\":\"Hello world\"}'
+    SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+  uses: avian-aero/slack-action@master
 ```
-
-Here's what the Slack message would look like:
-
-<img src="docs/images/slack-message-example.png" width="540">
 
 ## Setup
 
